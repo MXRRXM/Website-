@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manifest XR | Products Catalogue & Quote Enquiry</title>
+
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+  <style>
+    :root{
+      --navy: #1F2A44; --navy-2: #141B2D; --burgundy: #721422; --gold: #B4975A;
+      --electric: #3C9DFF; --stone: #F6F2EA; --white: #ffffff;
+      --text-dark: #1A1A1A; --text-light: #595959; --text-on-dark: rgba(255,255,255,0.92);
+      --shadow: 0 10px 35px rgba(20, 27, 45, 0.18); --shadow-soft: 0 6px 22px rgba(20, 27, 45, 0.12);
+      --radius: 12px; --max: 1100px;
+    }
+
+    *{box-sizing:border-box}
+    body{ margin:0; font-family: 'Segoe UI', sans-serif; background-color: var(--stone); color: var(--text-dark); line-height: 1.7; }
+    .topbar { position: sticky; top: 0; z-index: 2000; background: rgba(31, 42, 68, 0.92); color: var(--white); border-bottom: 1px solid rgba(180,151,90,0.35); backdrop-filter: blur(10px); }
+    .topbar-inner{ max-width: var(--max); margin: 0 auto; padding: 10px 20px; display:flex; align-items:center; justify-content: space-between; gap:12px; flex-wrap: wrap; }
+    .badge{ width: 38px; height: 38px; border: 1px solid rgba(60,157,255,0.35); background: radial-gradient(circle at 30% 30%, rgba(60,157,255,0.18), rgba(0,0,0,0)); display:flex; align-items:center; justify-content:center; border-radius: 12px; font-weight: 900; color: var(--gold); }
+    .brand-text strong{ display:block; text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; color: var(--gold); }
+    .top-actions a{ text-decoration:none; font-weight: 850; text-transform: uppercase; font-size: 11px; padding: 12px 16px; border-radius: 12px; border: 1px solid rgba(180,151,90,0.45); background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.90); transition: 0.22s; }
+    .top-actions a.primary{ background: linear-gradient(180deg, var(--gold), #947b4a); color: white; }
+    
+    .page{ max-width: var(--max); margin: 0 auto; padding: 20px 20px 80px; }
+    .hero{ border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); background: linear-gradient(180deg, #1f2a44, #141b2d); padding: 34px; margin-bottom: 22px; color: var(--text-on-dark); position: relative; }
+    .card{ background: rgba(255,255,255,0.94); border-radius: var(--radius); margin-bottom: 22px; overflow: hidden; box-shadow: var(--shadow-soft); border: 1px solid rgba(20,27,45,0.06); }
+    .card-inner{ padding: 34px; }
+    
+    h2{ font-size: 18px; color: var(--burgundy); text-transform: uppercase; letter-spacing: 1.5px; border-bottom: 1px solid rgba(20,27,45,0.08); padding-bottom: 10px; margin-bottom: 18px; }
+
+    /* Image Gallery */
+    .product-images { display: flex; gap: 15px; margin-top: 15px; }
+    .product-images img { width: calc(50% - 7.5px); border-radius: 8px; border: 1px solid rgba(20,27,45,0.10); aspect-ratio: 16/9; object-fit: cover; background: #eee; }
+
+    .products-nav{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content: space-between; padding: 14px; border-radius: var(--radius); border: 1px solid rgba(20,27,45,0.10); background: rgba(246,242,234,0.85); margin-bottom: 18px; }
+    .tab{ appearance:none; border: 1px solid rgba(20,27,45,0.12); background: rgba(255,255,255,0.8); padding: 10px 12px; border-radius: 12px; cursor:pointer; font-weight: 900; text-transform: uppercase; font-size: 11px; transition: 0.2s; }
+    .tab.is-active{ border-color: var(--gold); background: white; box-shadow: 0 0 0 3px rgba(180,151,90,0.18); }
+    
+    .product-picker select{ border: 1px solid rgba(20,27,45,0.14); border-radius: 12px; padding: 10px 12px; min-width: 260px; }
+    .product-panel{ display:none; }
+    .product-panel.is-active{ display:block; }
+
+    .panel-block{ background: rgba(246,242,234,0.75); border: 1px solid rgba(20,27,45,0.10); border-radius: var(--radius); padding: 14px; }
+    .row{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+    .field{ background: rgba(246,242,234,0.85); border: 1px solid rgba(20,27,45,0.08); border-radius: var(--radius); padding: 14px; }
+    .field label{ display:block; font-size: 11px; font-weight: 900; text-transform: uppercase; color: rgba(20,27,45,0.75); margin-bottom: 8px; }
+    .field input{ width: 100%; padding: 12px; border-radius: 12px; border: 1px solid rgba(20,27,45,0.14); }
+
+    .summary{ margin-top: 12px; padding: 14px; border-radius: 14px; border: 1px solid rgba(20,27,45,0.10); background: rgba(255,255,255,0.85); }
+    .summary pre{ margin:0; white-space: pre-wrap; font-family: monospace; font-size: 12.5px; }
+
+    .btn{ display:inline-flex; align-items:center; justify-content:center; padding: 14px 18px; border-radius: 14px; border: 1px solid var(--gold); background: linear-gradient(180deg, var(--gold), #947b4a); color:white; text-decoration:none; font-weight: 900; font-size: 11px; cursor:pointer; transition: 0.22s; }
+    .btn.secondary{ background: rgba(60,157,255,0.14); border-color: var(--electric); color: var(--navy); }
+
+    @media (max-width: 900px){ .row, .product-images { grid-template-columns: 1fr; flex-direction: column; } .product-images img { width: 100%; } }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><div class="badge">MX</div><div class="brand-text"><strong>Manifest XR</strong><span>Products Catalogue</span></div></div>
+   <div class="top-actions">
+  <a href="index.html">Home</a>
+  <a href="products.html" style="border-color: var(--gold); background: rgba(180,151,90,0.1);">Catalogue</a>
+</div>
+    </div>
+  </div>
+
+
+  <main class="page">
+    <section class="hero">
+      <h1>Product Catalogue</h1>
+      <p>Select a product tab, set quantities, and request a quote for your institution.</p>
+    </section>
+
+    <article class="card">
+      <div class="card-inner">
+        <h2>Products</h2>
+        
+        <div class="products-nav">
+          <div class="tabs">
+            <button class="tab is-active" data-tab="tasi">TASI AI</button>
+            <button class="tab" data-tab="classroom">Future Classroom</button>
+            <button class="tab" data-tab="holo">Holographic Lab</button>
+            <button class="tab" data-tab="mr">Mixed Reality Lab</button>
+            <button class="tab" data-tab="immersive">Immersive Lab</button>
+          </div>
+          <div class="product-picker">
+            <select id="productOption"></select>
+          </div>
+        </div>
+
+        <div id="panel-tasi" class="product-panel is-active" data-panel="tasi">
+            <div class="panel-block"><strong>TASI AI</strong><br>3,700 AED per user / year (Min 10)</small>
+
+<hr style="border: 0; border-top: 1px solid rgba(20,27,45,0.08); margin: 15px 0;">
+
+    <div style="margin-bottom: 20px;">
+      <strong>TASI Academy</strong><br>
+      <small style="color: var(--text-light);">8,000 AED per user / year (Min 10)</small>
+    </div>
+
+<iframe title="vimeo-player" src="https://player.vimeo.com/video/1170965050?h=96a1c7736d" width="640" height="360" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"   allowfullscreen></iframe> 
+      </iframe>
+    </div>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+</div>
+</div>
+        <div id="panel-classroom" class="product-panel" data-panel="classroom">
+          <div class="panel-block">
+            <strong>Future Classroom Solution</strong>
+            <div class="product-images">
+              <img src="classroom1.jpg" alt="Classroom 1"><img src="classroom2.jpg" alt="Classroom 2">
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-holo" class="product-panel" data-panel="holo">
+          <div class="panel-block">
+            <strong>Holographic Lab</strong>
+            <div class="product-images">
+              <img src="holo1.jpg" alt="Holo 1"><img src="holo2.jpg" alt="Holo 2">
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-mr" class="product-panel" data-panel="mr">
+          <div class="panel-block">
+            <strong>Mixed Reality Lab</strong>
+            <div class="product-images">
+              <img src="mr1.jpg" alt="MR 1"><img src="mr2.jpg" alt="MR 2">
+            </div>
+          </div>
+        </div>
+
+        <div id="panel-immersive" class="product-panel" data-panel="immersive">
+          <div class="panel-block">
+            <strong>Immersive Lab</strong>
+            <div class="product-images">
+              <img src="immersive1.jpg" alt="Immersive 1"><img src="immersive2.jpg" alt="Immersive 2">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Quantity</label>
+            <input id="quantity" type="number" min="1" placeholder="e.g. 10" disabled>
+          </div>
+          <div class="field">
+            <label>Your Email</label>
+            <input id="requestEmail" type="email" placeholder="name@institution.edu">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label>Notes (optional)</label>
+            <input id="notes" type="text" placeholder="e.g. desired go-live date">
+          </div>
+          <div class="field">
+            <label>Demo</label>
+            <div class="chk">
+              <input type="checkbox" id="wantDemo">
+              <label for="wantDemo" style="display:inline; font-weight:bold;"> I would like to schedule a demo</label>
+            </div>
+            <div id="demoActions" style="display:none; margin-top:10px;">
+              <a class="btn secondary js-calendly" href="#">Open Calendly</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary" id="summaryBox">
+          <strong>Selection Summary</strong>
+          <pre id="summaryText">Manifest XR — Product Quote Request...</pre>
+        </div>
+
+        <div class="actions" style="margin-top:20px; display:flex; gap:10px; justify-content: flex-end;">
+          <button class="btn secondary" id="copyBtn">Copy Summary</button>
+          <a class="btn" id="mailtoBtn" href="mailto:alex@manifestrealityxr.com">Generate Quote Email</a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <script>
+    (function(){
+      const PRODUCT_OPTIONS = {
+        tasi: [{v:"TASI", l:"TASI"}, {v:"TASI Academy", l:"TASI Academy"}],
+        classroom: [{v:"Future Classroom Solution", l:"Request Quote"}],
+        holo: [{v:"Inspire 2", l:"Inspire 2"}, {v:"Inspire 2 Pro", l:"Inspire 2 Pro"}],
+        mr: [{v:"Pico 4", l:"Pico 4"}, {v:"Meta Quest 3", l:"Meta Quest 3"}, {v:"Meta Quest 3S", l:"Meta Quest 3S"}],
+        immersive: [{v:"Immersive Lab", l:"Request Quote"}]
+      };
+
+      const tabs = document.querySelectorAll(".tab");
+      const panels = document.querySelectorAll(".product-panel");
+      const productOption = document.getElementById("productOption");
+      const quantity = document.getElementById("quantity");
+      const requestEmail = document.getElementById("requestEmail");
+      const notes = document.getElementById("notes");
+      const wantDemo = document.getElementById("wantDemo");
+      const demoActions = document.getElementById("demoActions");
+      const summaryText = document.getElementById("summaryText");
+
+      let activeCat = "tasi";
+
+      function updateSummary() {
+        const email = requestEmail.value || "(not provided)";
+        const qty = quantity.value || (productOption.value ? "(enter quantity)" : "(select a product option first)");
+        const isDemo = wantDemo.checked ? "Yes" : "No";
+        const cal = wantDemo.checked ? "Requested via Calendly" : "(not requested)";
+        
+        summaryText.textContent = `Manifest XR — Product Quote Request
+----------------------------------
+Product Selection:
+- Category: ${activeCat.charAt(0).toUpperCase() + activeCat.slice(1)}
+- Option: ${productOption.value || "(not selected)"}
+- Quantity: ${qty}
+
+Quote should be sent to:
+- Requester email: ${email}
+
+Notes:
+- ${notes.value || "(none provided)"}
+
+Demo:
+- Demo requested: ${isDemo}
+- Calendly: ${cal}`;
+
+// 2. Update the text on the page
+        summaryText.textContent = fullText;
+
+        // 3. UPDATE THE MAILTO LINK DYNAMICALLY
+        const mailtoBtn = document.getElementById("mailtoBtn");
+        const subject = `Quote Request: ${productOption.value || activeCat}`;
+        const body = fullText;
+        
+        mailtoBtn.href = `mailto:alex@manifestrealityxr.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+      }
+
+      function setCategory(key) {
+        activeCat = key;
+        tabs.forEach(t => t.classList.toggle("is-active", t.dataset.tab === key));
+        panels.forEach(p => p.classList.toggle("is-active", p.dataset.panel === key));
+        
+        productOption.innerHTML = '<option value="">Select an option...</option>';
+        PRODUCT_OPTIONS[key].forEach(o => {
+          const el = document.createElement("option"); el.value = o.v; el.textContent = o.l;
+          productOption.appendChild(el);
+        });
+        quantity.disabled = true;
+        updateSummary();
+      }
+
+      tabs.forEach(t => t.addEventListener("click", () => setCategory(t.dataset.tab)));
+      productOption.addEventListener("change", () => { quantity.disabled = !productOption.value; updateSummary(); });
+      [quantity, requestEmail, notes].forEach(el => el.addEventListener("input", updateSummary));
+      
+      wantDemo.addEventListener("change", () => {
+        demoActions.style.display = wantDemo.checked ? "block" : "none";
+        updateSummary();
+      });
+
+      document.getElementById("copyBtn").addEventListener("click", () => {
+        navigator.clipboard.writeText(summaryText.textContent);
+        alert("Summary copied to clipboard!");
+      });
+
+      setCategory("tasi");
+    })();
+  </script>
+</body>
+</html>
