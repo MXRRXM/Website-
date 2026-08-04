@@ -92,10 +92,22 @@ p a:hover{
 }
 
 .logo{
-  color: #B4975A;
-  font-weight: 900;
-  text-decoration: none;
-  letter-spacing: 1px;
+  display:inline-flex;
+  align-items:center;
+  flex-shrink:0;
+  text-decoration:none;
+  line-height:0;
+}
+
+.logo img{
+  display:block;
+  width:150px;
+  height:auto;
+  max-height:72px;
+  object-fit:contain;
+  background:#ffffff;
+  border-radius:8px;
+  padding:4px 8px;
 }
 
 .site-nav nav a{
@@ -368,8 +380,9 @@ p a:hover{
 <body>
 <header class="site-nav">
   <div class="nav-inner">
-    <a href="index.html" class="logo">ManifestXR</a>
-
+<a href="index.html" class="logo" aria-label="Manifest XR home">
+  <img src="manifest-logo.jpeg" alt="Manifest XR">
+</a>
     <nav>
       <a href="index.html">Home</a>
       <a href="future-classroom.html">Future Classroom</a>
