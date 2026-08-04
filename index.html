@@ -97,20 +97,27 @@
       gap:12px;
       min-width: 240px;
     }
-    .brand-badge{
-      width: 38px;
-      height: 38px;
-      border: 1px solid rgba(60,157,255,0.35);
-      background: radial-gradient(circle at 30% 30%, rgba(60,157,255,0.18), rgba(0,0,0,0));
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius: 12px;
-      font-weight: 900;
-      color: var(--gold);
-      letter-spacing: 1px;
-      box-shadow: 0 0 18px rgba(60,157,255,0.12);
-    }
+    .brand-logo{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex-shrink:0;
+  line-height:0;
+  text-decoration:none;
+}
+
+.brand-logo img{
+  display:block;
+  width:70px;
+  height:48px;
+  object-fit:contain;
+  background:#ffffff;
+  border-radius:8px;
+  padding:3px 6px;
+  border:1px solid rgba(180,151,90,0.35);
+  box-shadow:0 0 18px rgba(60,157,255,0.12);
+}
+ 
     .brand-text{ line-height: 1.1; }
     .brand-text strong{
       display:block;
@@ -634,6 +641,14 @@
     }
 
     @media (max-width: 768px) {
+      .brand-logo img{
+  width:60px;
+  height:42px;
+}
+
+.brand-line{
+  min-width:auto;
+}
       .hero-carousel{ height: 560px; }
       .hero-title { font-size: 2.1rem; }
       .banner-inner { flex-direction: column; text-align: center; }
@@ -649,15 +664,16 @@
 </head>
 
 <body>
-<div class="sticky-cta">
-    <div class="sticky-cta-inner">
-      <div class="brand-line">
-        <div class="brand-badge">MX</div>
-        <div class="brand-text">
-          <strong>Manifest XR</strong>
-          <span>Immersive Classrooms & AI for Education</span>
-        </div>
-      </div>
+<div class="brand-line">
+  <a href="index.html" class="brand-logo" aria-label="Manifest XR home">
+    <img src="manifest-logo.jpeg" alt="Manifest XR">
+  </a>
+
+  <div class="brand-text">
+    <strong>Manifest XR</strong>
+    <span>Immersive Classrooms &amp; AI for Education</span>
+  </div>
+</div>
 
       <div class="cta-actions">
         <a class="cta-quote" href="TASI.html">TASI (AI)</a>
